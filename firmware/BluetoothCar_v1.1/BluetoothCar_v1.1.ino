@@ -100,7 +100,7 @@ void parsing() {
         string_convert += incomingChar; // записываем  принятые данные в переменную
       }
     }
-    else if (incomingChar == '$') {          // начало парсинга
+    else if (incomingChar == '$') {     // начало парсинга
       startParsing = true;              // начать принятие пакетов
     }
   }
