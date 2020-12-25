@@ -39,7 +39,7 @@ GMotor motorL(DRIVER2WIRE, LEFT_MOTOR_D, LEFT_MOTOR_PWM, LEFT_MOTOR_MODE);
 #include <SoftwareSerial.h>
 SoftwareSerial BTserial(BT_TX, BT_RX); // TX, RX
 
-boolean doneParsing, startParsing;
+bool doneParsing, startParsing;
 int dataX, dataY;
 String string_convert;
 
@@ -75,8 +75,8 @@ void loop() {
     int dutyR = joystickY + joystickX; // считаем сигнал для правого мотора
     int dutyL = joystickY - joystickX; // считаем сигнал для левого мотора
 
-    dutyR = constrain(dutyR, -MOTOR_MAX, MOTOR_MAX); // ограничиваем значение для dutyR, на случай если dutyR > 255
-    dutyL = constrain(dutyL, -MOTOR_MAX, MOTOR_MAX); // ограничиваем значение для dutyL, на случай если dutyL > 255
+    dutyR = constrain(dutyR, -MOTOR_MAX, MOTOR_MAX); // ограничиваем значение, на случай если dutyR не в 0-255
+    dutyL = constrain(dutyL, -MOTOR_MAX, MOTOR_MAX); // ограничиваем значение, на случай если dutyL не в 0-255
 
     motorR.smoothTick(dutyR); // плавно крутим правый мотор
     motorL.smoothTick(dutyL); // плавно крутим левый мотор
@@ -100,7 +100,7 @@ void parsing() {
         string_convert += incomingChar; // записываем  принятые данные в переменную
       }
     }
-    if (incomingChar == '$') {          // начало парсинга
+    else if (incomingChar == '$') {          // начало парсинга
       startParsing = true;              // начать принятие пакетов
     }
   }
